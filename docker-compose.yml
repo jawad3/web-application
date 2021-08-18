@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  api:
+    build: ./backend
+    environment:
+      - CONNECTION_STRING=postgres://jawad123:jawad123@db/dojo_courses
+    depends_on:
+      - db
+    networks:
+      - private_network
+      - public_network
+
+  webapp:
+    build: ./frontend
+    environment:
+      - API_URL=http://api:3001/data
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    networks:
+      - public_network
+    depends_on: 
+      - api
+
+  db:
+    image: postgres:11.2-alpine
+    container_name: postgres
+
+    environment:
+      - "POSTGRES_PASSWORD=jawad123"
+      - "POSTGRES_USER=jawad123"
+      - "POSTGRES_DB=dojo_courses"
+    volumes:
+      - ./sql_scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - private_network
+
+networks:
+  private_network:
+  public_network:
+volumes:
+  postgres-config1:
