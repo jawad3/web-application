@@ -56,8 +56,12 @@ jobs:
           file: ./frontend/Dockerfile
           platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           push: true
-          tags: ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/app:latest
-
+          tags: ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/web:v1
+          # tags: |
+          #   user/app:latest
+          #   user/app:1.0.0
+          #   ghcr.io/user/app:latest
+          #   ghcr.io/user/app:1.0.0
       #     # build api image            
       # - name: Build and push api
       #   id: docker_build
