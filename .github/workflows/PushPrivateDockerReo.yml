@@ -1,6 +1,6 @@
 
 
-name: CI for docker hello_flask_sql_class
+name: CI for for docker nodejs web-app 
 on:
   push:
     branches: [master]
