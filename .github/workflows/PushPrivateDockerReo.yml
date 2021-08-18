@@ -8,12 +8,12 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Login to Git Hub
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: github/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./backend/Dockerfile
+          file: ./frontend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/api:v1
